@@ -42,4 +42,7 @@ console.log(msg);
 
 const chalk = require("chalk");
 
-console.log(chalk.green("Success!"));
+const greenMsgInv = chalk.blue.bold.bgGreen.italic("Success!");
+const greenMsgUl = chalk.green.bold.italic.underline("Success!");
+
+console.log(greenMsgInv, greenMsgUl);
