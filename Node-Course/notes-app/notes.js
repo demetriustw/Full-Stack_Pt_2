@@ -1,27 +1,9 @@
 // console.log("notes.js");
 const fs = require("fs");
+const chalk = require("chalk");
 
-const getNotes = function () {
+const getNotes = () => {
   return "Your notes...";
-};
-
-const addNote = function (title, body) {
-  const notes = loadNotes();
-  const duplicateNotes = notes.filter(function (note) {
-    return note.title === title;
-  });
-
-  if (duplicateNotes.length === 0) {
-    notes.push({
-      title: title,
-      body: body,
-    });
-
-    saveNotes(notes);
-    console.log("New note added!");
-  } else {
-    console.log("Note title taken!");
-  }
 };
 
 //
@@ -29,16 +11,14 @@ const addNote = function (title, body) {
 //
 // 1. Setup the remove command to take a required "--title" option
 // 2. Create and export a removeNote function form notes.js
-// 2. Call removeNote in remove command handler
-// 2. Have removeNote log the title of the note to be removed
-// 3. Test your work by running both commands and ensure correct output
+// 3. Call removeNote in remove command handler
+// 4. Have removeNote log the title of the note to be removed
+// 5. Test your work using: node app.js remove --title="some title"
 //
 
-const removeNote = function (title) {
+const addNote = (title, body) => {
   const notes = loadNotes();
-  const duplicateNotes = notes.filter(function (note) {
-    return note.title === title;
-  });
+  const duplicateNotes = notes.filter((note) => note.title === title);
 
   if (duplicateNotes.length === 0) {
     notes.push({
@@ -47,18 +27,38 @@ const removeNote = function (title) {
     });
 
     saveNotes(notes);
-    console.log("New note added!");
+    console.log(
+      chalk.green.inverse.bold("New note added!" + "'" + title + "'")
+    );
   } else {
-    console.log("Note title taken!");
+    console.log(chalk.red.inverse.bold("Note title taken!"));
   }
 };
 
-const saveNotes = function (notes) {
+const removeNote = (title) => {
+  const notes = loadNotes();
+  const notesToKeep = notes.filter((note) => note.title !== title);
+
+  if (notesToKeep < notes) {
+    saveNotes(notesToKeep);
+    console.log(chalk.green.inverse.bold("Note removed!" + "'" + title + "'"));
+  } else {
+    console.log(chalk.red.inverse.bold("Note not found!"));
+  }
+};
+
+const listNotes = () => {
+  const notes = loadNotes();
+  console.log(chalk.blue.underline.bold("Your notes:"));
+  return notes.filter((note) => console.log(chalk.blue(note.title)));
+};
+
+const saveNotes = (notes) => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
 };
 
-const loadNotes = function () {
+const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync("notes.json");
     const dataJSON = dataBuffer.toString();
@@ -71,4 +71,6 @@ const loadNotes = function () {
 module.exports = {
   getNotes: getNotes,
   addNote: addNote,
+  removeNote: removeNote,
+  listNotes: listNotes,
 };

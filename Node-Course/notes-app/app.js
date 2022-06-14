@@ -93,12 +93,64 @@ yargs.version("1.1.0");
 // console.log(process.argv);
 
 //
+// Challenge 1: Add two new commands
+//
+// 1. Setup command support "list" command (print placeholder message for now)
+// 2. Setup command support "read" command (print placeholder message for now)
+// 3. Test your work by running both commands and ensure correct output
+//
+
+//
 // Challenge 2: Add an option to yargs
 //
 // 1. Setup a body option for the add command
 // 2. Configure a description, make it requried, and for it to be a string
 // 3. Log the body value in the handler function
 // 4. Test your work!
+//
+
+//
+// Challenge 3.1: Setup command option
+//
+// 1. Setup the remove command to take a required "--title" option
+// 2. Create and export a removeNote function form notes.js
+// 3. Call removeNote in remove command handler
+// 4. Have removeNote log the title of the note to be removed
+// 3. Test your work using: node app.js remove --title="some title"
+//
+
+//
+// Challenge 3.2: Wire up removeNote
+//
+// 1. Load existing notes
+// 2. Use array filter method to remove the matching note (if any)
+// 3. Save the newly created array
+// 4. Test your work with a title that exists and a title that doesn't exist
+//
+
+//
+// Challenge 3.2: Use chalk to provide usful logs for remove
+//
+// 1. If a note is removed, print "Note removed!" with a green background
+// 2. If no note is removed, print "No note found!" with a red background
+//
+
+//
+// Goal: Refactor all functions
+//
+// 1. If function is a method, use ES6 meathod definition syntax
+// 2. Otherwise, use most concise arrow function possible
+// 3. Test your work!
+//
+
+//
+// Goal: Wire up list command
+//
+// 1. Create and export listNotes from notes.js
+//    - "Your notes" using chalk
+//    - Print note title for each note
+// 2. Call listNotes from command handler
+// 3. Test your work!
 //
 
 // Create add command
@@ -117,7 +169,7 @@ yargs.command({
       type: "string",
     },
   },
-  handler: function (argv) {
+  handler(argv) {
     notes.addNote(argv.title, argv.body);
   },
 });
@@ -126,25 +178,24 @@ yargs.command({
 yargs.command({
   command: "remove",
   describe: "Remove a note",
-  handler: function () {
-    console.log("Removing the note!");
+  builder: {
+    title: {
+      describe: "Note title",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  handler(argv) {
+    notes.removeNote(argv.title);
   },
 });
-
-//
-// Challenge 1: Add two new commands
-//
-// 1. Setup command support "list" command (print placeholder message for now)
-// 2. Setup command support "read" command (print placeholder message for now)
-// 3. Test your work by running both commands and ensure correct output
-//
 
 // Create list command
 yargs.command({
   command: "list",
   describe: "List all notes",
-  handler: function () {
-    console.log("Listing all the notes!");
+  handler(argv) {
+    notes.listNotes();
   },
 });
 
@@ -152,7 +203,7 @@ yargs.command({
 yargs.command({
   command: "read",
   describe: "Print the note",
-  handler: function () {
+  handler() {
     console.log("Printing the note!");
   },
 });
