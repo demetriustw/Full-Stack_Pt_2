@@ -10,7 +10,21 @@ body {
   color: white;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 30%;
+  padding: 20px;
+  width: 600px;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.what-container {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 70%;
   padding: 20px;
   width: 600px;
   transform: translate(-50%, -50%);
@@ -92,14 +106,32 @@ body {
   flex-grow: 2;
 }
 .todo-list-item .edit {
-  color: rgb(143, 233, 58);
+  color: rgb(233, 233, 58);
   margin-right: 10px;
   cursor: pointer;
   text-decoration: none;
 }
 .todo-list-item .remove {
   color: rgb(243, 96, 96);
-  margin-right: 5px;
+  margin-right: 10px;
   cursor: pointer;
   text-decoration: none;
+}
+
+.what-container a {
+  margin-top: 20%;
+  margin-left: 40%;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  background-color: orangered;
+}
+.what-container p {
+  top: 50%;
+  left: 40%;
+  margin-top: 20px;
+  margin-left: 32%;
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
 }

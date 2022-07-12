@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 3443;
+const PORT = 3000;
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const TodoTask = require("./models/TodoTasks");

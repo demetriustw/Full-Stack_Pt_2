@@ -12,6 +12,22 @@
     integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
     crossorigin="anonymous"
   />
+  <script>
+    function GetValue() {
+      var myarray = new Array(
+        "Draw",
+        "paint",
+        "exercise",
+        "challenge yourself",
+        "wright a story",
+        "do something to laugh",
+        "make puns"
+      );
+      var random = myarray[Math.floor(Math.random() * myarray.length)];
+      //alert(random);
+      document.getElementById("message").innerHTML = random;
+    }
+  </script>
   <!-- <link rel="stylesheet" href="../public/stylesheets/style.css" /> -->
 </head>
 <body>
@@ -34,6 +50,22 @@
           </a>
         </li>
         <% }) %>
+      </ul>
+    </div>
+  </div>
+  <div class="what-container">
+    <h2>What should you do?</h2>
+    <div class="todo">
+      <ul class="todo-list">
+        <a
+          type="button"
+          id="btnSearch"
+          value="Search"
+          onclick="GetValue();"
+          value="Get Idea"
+          >Get Ideas</a
+        >
+        <p id="message"></p>
       </ul>
     </div>
   </div>
